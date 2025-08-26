@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="imagens/pngwing.com.png">
+    <title>Tela de Cadastro</title>
+</head>
+<body>
+    <h2>Cadastro</h2>
+    <form action="processa.php" method="POST">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,}(\.[a-z]{2,})?$" title="Por favor, insira um e-mail válido.">
+     
+      <label for="telefone">Telefone:</label>
+      <input type="tel" id="telefone" name="telefone" required>
+
+        <label for="senha">Senha</label>
+        <div class="mostrasenha">
+         <input id="senha" name="senha" type="password" placeholder="Sua senha" autocomplete="current-password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="A senha deve ter pelo menos 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial." />
+          <button id="olho" type="button" aria-label="Mostrar ou ocultar senha" onclick="toggleSenha()">
+            👁️
+          </button> <br>
+          </div>
+          <div class="mostrasenha2">
+            <input id="confirmar-senha" type="password" name="confirmar-senha" placeholder="Confirmar senha" required />
+          <button id="olho2" type="button" onclick="toggleSenha2('confirmar-senha')">👁️</button>  
+        </div>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <script>
+      const telInput = document.getElementById('telefone');
+
+  telInput.addEventListener('input', function (e) {
+    let valor = e.target.value.replace(/\D/g, ""); 
+
+    if (valor.length > 11) valor = valor.slice(0, 11);
+
+    if (valor.length > 6) {
+      valor = valor.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+    } else if (valor.length > 2) {
+      valor = valor.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
+    } else {
+      valor = valor.replace(/^(\d*)/, "($1");
+    }
+
+    e.target.value = valor;
+  });
+    document.querySelector('form').addEventListener('submit', function(e) {
+    const senha = document.getElementById('senha').value;
+    const confirmar = document.getElementById('confirmar-senha').value;
+    if (senha !== confirmar) {
+        e.preventDefault();
+        const style = 'input:required:invalid{ border-color: rgba(255,77,109,.6)}';
+        alert('As senhas devem coincidir.');
+        document.getElementById('senha').value = '';
+        document.getElementById('confirmar-senha').value = '';
+    
+    }});
+     function toggleSenha(){
+      const input = document.getElementById('senha');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    };
+   function toggleSenha2(idCampo) {
+  const input = document.getElementById(idCampo);
+  input.type = input.type === 'password' ? 'text' : 'password';
+
+  
+}
+</script>
+</body>
+</html>
