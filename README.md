@@ -1,147 +1,64 @@
-# Sistema-de-Login-Simples
-Sistema de login desenvolvido em PHP, com suporte de JavaScript, que utiliza um arquivo .txt para armazenar os dados em vez de um banco de dados.
+🔐 PHP Login System (Txt-Based)
+Este projeto implementa um sistema de cadastro e autenticação de usuários utilizando PHP para processamento e arquivos de texto (.txt) para persistência de dados. É uma solução leve e didática para entender o fluxo de envio de formulários e manipulação de sistemas de arquivos.
 
-📋 Projeto: Sistema de Cadastro e Login
+📖 Sobre o Projeto
+Diferente de sistemas convencionais que utilizam MySQL, este projeto utiliza o sistema de arquivos do servidor para armazenar credenciais. O design foi construído com foco em UI/UX moderno, utilizando técnicas de Glassmorphism e animações fluidas em CSS.
 
-Este projeto implementa uma tela de cadastro e uma tela de login simples utilizando HTML5, CSS3, JavaScript (ES6) e PHP 7+.
-O objetivo é permitir que usuários se registrem em um formulário e depois acessem sua conta com e-mail e senha.
+🚀 Funcionalidades
+📝 Cadastro de Usuários
+Validação com Regex: E-mail e senhas validados no front-end.
 
-🚀 Tecnologias Utilizadas
+Segurança de Senha: Requisito de complexidade (letras maiúsculas, minúsculas, números e caracteres especiais).
 
-HTML5
-Estrutura das páginas de cadastro (formulario.html) e login (login.html).
+Máscara de Telefone: Formatação automática (XX) XXXXX-XXXX via JavaScript.
 
-CSS3 (com variáveis customizadas e efeitos visuais)
-Arquivos style.css e login.css definem a estilização com design moderno (glassmorphism, sombras e gradientes).
-Recursos utilizados:
+Persistência: Armazenamento estruturado no formato email;senha; em arquivo de texto.
 
-Variáveis CSS (:root) para cores e efeitos.
+🔑 Sistema de Login
+Autenticação Manual: Varredura lógica no arquivo .txt para validação de credenciais.
 
-backdrop-filter para criar efeito de vidro.
+Feedback de Erro: Sistema de alertas via URL (?erro=1) para logins inválidos.
 
-@keyframes para animação de rotação.
+Visualização de Senha: Recurso de toggle (mostrar/ocultar) para melhorar a experiência do usuário.
 
-Responsividade com @media queries.
+🛠️ Tecnologias Utilizadas
+Front-end: HTML5 e CSS3 (Variáveis customizadas, backdrop-filter para efeito de vidro, @keyframes para animações).
 
-JavaScript (ES6+)
-Scripts integrados para:
+Lógica de Script: JavaScript (ES6+) para máscaras e validações em tempo real.
 
-Máscara de telefone (formato brasileiro).
+Back-end: PHP 7.4+ (Manipulação de arquivos com fopen, fwrite e leitura de strings).
 
-Validação de confirmação de senha.
+Armazenamento: Arquivo de texto plano (.txt).
 
-Botão para mostrar/ocultar senha (toggleSenha).
+📂 Estrutura de Pastas
+```Plaintext
+PROJETO/
+├── 📄 formulario.html      # Interface de cadastro
+├── 🎨 style.css           # Estilização da tela de cadastro
+├── ⚙️ processa.php        # Lógica de escrita no arquivo .txt
+├── 📁 Login/
+│   ├── 📄 login.html      # Interface de acesso
+│   ├── 🎨 login.css       # Estilização da tela de login
+│   ├── ⚙️ processa2.php       # Lógica de leitura e validação
+│   └── 📄 dados.txt       # "Banco de dados" em texto plano
+└── 📁 imagens/            # Recursos visuais e destino pós-login
+```
+🛡️ Aviso de Segurança (Fins Acadêmicos)
+Este sistema foi desenvolvido para propósitos didáticos. Para um ambiente de produção, as seguintes melhorias seriam obrigatórias:
 
-Exibição de mensagem de erro em caso de falha no login.
+Criptografia: Uso de password_hash() para nunca salvar senhas em texto puro.
 
-PHP 7+
-Processamento de formulários e persistência dos dados em arquivos .txt.
-Arquivos principais:
+Sessões: Implementação de session_start() para manter o usuário logado.
 
-processa.php → recebe dados do cadastro e armazena em Login/dados.txt.
+Banco de Dados: Substituição do .txt por MySQL/PostgreSQL para maior escalabilidade e segurança.
 
-processa2.php → valida credenciais no login.
+⚙️ Como Executar
+Certifique-se de ter um servidor local instalado (XAMPP, WAMP ou Laragon).
 
-📂 Estrutura do Projeto
-📦 Projeto
- ┣ 📜 formulario.html      # Página de cadastro
- ┣ 📜 style.css            # Estilos da tela de cadastro
- ┣ 📜 processa.php         # Processa e armazena dados do cadastro
- ┣ 📂 Login
- ┃ ┣ 📜 login.html         # Página de login
- ┃ ┣ 📜 login.css          # Estilos da tela de login
- ┃ ┣ 📜 processa2.php      # Valida login
- ┃ ┣ 📜 dados.txt          # Arquivo com usuários cadastrados
- ┣ 📂 imagens
- ┃ ┗ 📜 pngwing.com.png    # Ícone do site
- ┃ ┗ 📜 Fotinha.jpg        # Redirecionamento após login válido
+Clone ou copie a pasta do projeto para o diretório raiz (htdocs ou www).
 
-⚙️ Funcionamento
-🔹 Cadastro (formulario.html)
+Certifique-se de que o servidor tem permissão de escrita na pasta Login/ para que o PHP possa criar/editar o arquivo dados.txt.
 
-O usuário preenche:
+Acesse: http://localhost/formulario.html.
 
-Nome
-
-E-mail (com regex para validar formato)
-
-Telefone (com máscara automática (XX) XXXXX-XXXX)
-
-Senha (mín. 8 caracteres, obrigando maiúscula, minúscula, número e caractere especial)
-
-Confirmação de senha
-
-O JavaScript impede o envio do formulário caso as senhas não coincidam.
-
-Os dados são enviados para processa.php, que:
-
-Salva o email;senha; em Login/dados.txt.
-
-Redireciona para a tela de login.
-
-🔹 Login (login.html)
-
-O usuário insere e-mail e senha.
-
-processa2.php valida os dados:
-
-Lê o arquivo dados.txt.
-
-Verifica se o par email;senha; existe.
-
-Se válido → redireciona para imagens/Fotinha.jpg.
-
-Se inválido → retorna para login.html?erro=1 exibindo mensagem de erro.
-
-🔒 Segurança
-
-⚠️ Atenção: este projeto é apenas para fins acadêmicos/didáticos.
-Ele não deve ser usado em produção pois possui limitações graves:
-
-As senhas são salvas em texto puro (.txt), sem criptografia.
-
-Não há proteção contra SQL Injection (embora não use banco SQL, o conceito se aplica para manipulação de arquivos).
-
-Qualquer usuário com acesso ao servidor pode visualizar os dados diretamente.
-
-🔧 Para uso real, recomenda-se:
-
-Substituir dados.txt por um banco de dados (MySQL, PostgreSQL, SQLite).
-
-Usar hash seguro para senhas (password_hash / password_verify).
-
-Implementar sessões ($_SESSION) para autenticação segura.
-
-📌 Requisitos
-
-Servidor com suporte a PHP 7 ou superior.
-
-Navegador moderno com suporte a HTML5, CSS3 e ES6.
-
-▶️ Como Executar
-
-Instale o XAMPP ou similar.
-
-Copie os arquivos para a pasta htdocs (ou diretório raiz do servidor).
-
-Acesse pelo navegador:
-
-http://localhost/formulario.html → Tela de cadastro.
-
-http://localhost/Login/login.html → Tela de login.
-
-📷 Preview das Telas
-
-Tela de Cadastro: formulário com design glassmorphism, animação e validações.
-
-Tela de Login: layout simples e elegante com botão para mostrar senha.
-
-📌 Versões de Linguagens Utilizadas
-
-HTML: 5
-
-CSS: 3 (com variáveis customizadas e backdrop-filter)
-
-JavaScript: ES6+
-
-PHP: 7.4+ (compatível com 8.x)
+Desenvolvido por Duck101X 🚀
